@@ -54,12 +54,17 @@ public class Prog3TP1 {
           //d ingreso los articulos q quiero incluir en la matriz
           System.out.println("Articulos a Facturar ");
           boolean boolEncontrado=true;
+           CalculoFactura  calFactura= new CalculoFactura();
+            String [] codigoEncontrado;
+            int j=0;
+          for (int i = 0; i < cantArticulos; i++) {
+            
+        
           do{
           System.out.println("Ingrese el codigo del articulo");
           String codigoArt=sc.nextLine();
-          CalculoFactura  calFactura= new CalculoFactura();
          calFactura.mostrarArticulos();
-         String [] codigoEncontrado = calFactura.encontrarCodigo(codigoArt);
+         codigoEncontrado = calFactura.encontrarCodigo(codigoArt);
          if (codigoEncontrado==null){
              System.out.println("el codigo ingresado es incorrecto, intente nuevamente");
              boolEncontrado=false;
@@ -68,7 +73,8 @@ public class Prog3TP1 {
            System.out.println("codigo encontrado!");
            System.out.println("ingrese la cantidad a facturar");
            int cantidadAFact = sc.nextInt();
+           fac.llenarItems(codigoEncontrado, sc, i,j);
            
-        
+          }
     }
 }

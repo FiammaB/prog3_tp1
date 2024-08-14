@@ -109,21 +109,21 @@ public class Factura {
         this.itemsFactura = itemsFactura;
     }
 
-    public void llenarItems(String[] articulo, Scanner sc) {
+    public void llenarItems(String[] articulo, Scanner sc,int i ,int j) {
         String cantidadAFact=null;
-        for (int k = 0; k < itemsFactura.length; k++) {
-            for (int l = 0; l < 5; l++) {
-                itemsFactura[k][l] = articulo[l];
-                if (l == 3) {
+        
+            for (j = 0; j < 5; j++) {
+                itemsFactura[i][j] = articulo[j];
+                if (j== 3) {
                     System.out.println("ingrese la cantidad a facturar");
-                    if (itemsFactura[k][l].equalsIgnoreCase("U")) {
+                    if (itemsFactura[i][j].equalsIgnoreCase("U")) {
                         System.out.println("ingrese un numero entero");
                         cantidadAFact = sc.nextLine();
                         while (cantidadAFact.contains(".") & isInteger(cantidadAFact) == false) {
                             System.out.println("el numero ingresado no es un entero,intente nuevamente");
                             cantidadAFact = sc.nextLine();
                         }
-                    } else if (itemsFactura[k][l].equalsIgnoreCase("kg")) {
+                    } else if (itemsFactura[i][j].equalsIgnoreCase("kg")) {
                         System.out.println("ingrese un numero decimal");
                         cantidadAFact = sc.nextLine();
                         //habria q ver un metodo para  para confirmar q es double
@@ -132,17 +132,16 @@ public class Factura {
                             cantidadAFact = sc.nextLine();
                         }
                     }
-                    itemsFactura[k][l] = cantidadAFact;
+                    itemsFactura[i][j] = cantidadAFact;
                 }
-                 if (l == 4) {
-                int resultado = Integer.valueOf(cantidadAFact) * Integer.valueOf(itemsFactura[k][2]);
-                itemsFactura[k][l] = String.valueOf(resultado);
+                 if (j == 4) {
+                int resultado = Integer.valueOf(cantidadAFact) * Integer.valueOf(itemsFactura[i][2]);
+                itemsFactura[i][j] = String.valueOf(resultado);
             }
             }
            
         }
 
-    }
 
     public static boolean isInteger(String str) {
         try {
