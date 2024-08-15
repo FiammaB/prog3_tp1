@@ -27,13 +27,15 @@ public class Prog3TP1 {
             if (pago.equalsIgnoreCase("C")) {
                 fac.setTipoPago(pago);
                  System.out.println("el metodo de pago contado ha sido registrado ");
-                
+                validarPago= true;
             }else if (pago.equalsIgnoreCase("TC")){
                 fac.setTipoPago(pago);
                  System.out.println("el metodo de pago Tarjeta de Credito ha sido registrado ");
+                 validarPago= true;
             }else if (pago.equalsIgnoreCase("TD")){
                 fac.setTipoPago(pago);
                  System.out.println("el metodo de pago Tarjeta de Debito ha sido registrado ");
+                 validarPago= true;
             }else{System.out.println("El  metodo de pago no esta disponible ");
             validarPago=false;}
             
@@ -42,7 +44,7 @@ public class Prog3TP1 {
           //b solicito al usuario los articulos q voy a ingresar
           System.out.println("ingrese la cantidad  de articulos q desea ingresar");
           int cantArticulos = sc.nextInt();
-          sc.nextLine();
+         
           while (cantArticulos<=0) {          
               System.out.println("el numero ingresado es menor a cero,intente nuevamente");
             System.out.println("ingrese la cantidad  de articulos q desea ingresar");
@@ -61,19 +63,20 @@ public class Prog3TP1 {
             
         
           do{
+              calFactura.mostrarArticulos();
           System.out.println("Ingrese el codigo del articulo");
           String codigoArt=sc.nextLine();
-         calFactura.mostrarArticulos();
+         
          codigoEncontrado = calFactura.encontrarCodigo(codigoArt);
+          boolEncontrado=true;
          if (codigoEncontrado==null){
              System.out.println("el codigo ingresado es incorrecto, intente nuevamente");
              boolEncontrado=false;
          }
           }while (!boolEncontrado) ;
            System.out.println("codigo encontrado!");
-           System.out.println("ingrese la cantidad a facturar");
-           int cantidadAFact = sc.nextInt();
-           fac.llenarItems(codigoEncontrado, sc, i,j);
+           
+           fac.llenarItems(codigoEncontrado, sc, i);
            
           }
     }

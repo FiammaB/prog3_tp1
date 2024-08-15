@@ -109,16 +109,17 @@ public class Factura {
         this.itemsFactura = itemsFactura;
     }
 
-    public void llenarItems(String[] articulo, Scanner sc,int i ,int j) {
+    public void llenarItems(String[] articulo, Scanner sc,int i ) {
         String cantidadAFact=null;
         
-            for (j = 0; j < 5; j++) {
+            for (int j = 0; j < 4; j++) {
                 itemsFactura[i][j] = articulo[j];
                 if (j== 3) {
                     System.out.println("ingrese la cantidad a facturar");
                     if (itemsFactura[i][j].equalsIgnoreCase("U")) {
                         System.out.println("ingrese un numero entero");
                         cantidadAFact = sc.nextLine();
+                        
                         while (cantidadAFact.contains(".") & isInteger(cantidadAFact) == false) {
                             System.out.println("el numero ingresado no es un entero,intente nuevamente");
                             cantidadAFact = sc.nextLine();
