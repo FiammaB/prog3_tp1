@@ -52,7 +52,7 @@ public class Prog3TP1 {
         }
           //c asignacion de tamaño para matriz item factura
           sc.nextLine();
-          fac.setItemsFactura(new String[cantArticulos][5]);
+          fac.setItemsFactura(new String[cantArticulos][6]);
           //d ingreso los articulos q quiero incluir en la matriz
           System.out.println("Articulos a Facturar ");
           boolean boolEncontrado=true;
@@ -79,5 +79,9 @@ public class Prog3TP1 {
            fac.llenarItems(codigoEncontrado, sc, i);
            
           }
+          fac.montoTotalItems(cantArticulos);
+          fac.recargo();
+          fac.TotalFinal();
+          fac.mostraritems();
     }
 }
