@@ -22,7 +22,7 @@ public class Prog3TP1 {
             fac.setRazonSocial(sc.nextLine());
            boolean validarPago= true;
             do { 
-            System.out.println("ingrese el metodo de pago");
+            System.out.println("ingrese el metodo de pago C, TC, TD");
             String pago=sc.nextLine();
             if (pago.equalsIgnoreCase("C")) {
                 fac.setTipoPago(pago);

@@ -176,6 +176,7 @@ public class Factura {
         
     }
     public void mostraritems() {
+        System.out.println("  ");
         System.out.println(espacios("Fecha")+espacios(getFecha()));
         System.out.println(espacios("Nro° Factura")+espacios(String.valueOf(getNroFactura())));
         System.out.println(espacios("Razon Social")+espacios(getRazonSocial()));
@@ -192,6 +193,7 @@ public class Factura {
             System.out.println(espacios(strings[0] )+espacios(strings[1])+espacios(strings[2])+espacios(strings[3])+espacios(strings[4]));
             
         }
+        System.out.println("------------------------------------------------------------------------------------------------------");
         System.out.println(espacios("Total items")+espacios(String.valueOf(getMontoTotalItems())));
         System.out.println(espacios("Recargo")+espacios(String.valueOf(getRecargo())));
         System.out.println(espacios("Total Final")+espacios(String.valueOf(getMontoFinal())));
@@ -199,6 +201,14 @@ public class Factura {
     public static boolean isInteger(String str) {
         try {
             Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+     public static boolean isDouble(String str) {
+        try {
+            Double.parseDouble(str);
             return true;
         } catch (NumberFormatException e) {
             return false;

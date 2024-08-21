@@ -19,7 +19,7 @@ public class CalculoFactura {
     }
     public void mostrarArticulos() {
             for (String[] articulo : articulos) {
-                System.out.println("codigo: "+articulo[0]+"Denominacion"+articulo[1]+" Precio de articulo "+ articulo[2]+" medida de articulo "+ articulo[3]);
+                System.out.println("codigo:   "+articulo[0]+"  Denominacion:  "+articulo[1]+"   Precio de articulo:   "+ articulo[2]+"  medida de articulo:   "+ articulo[3]);
             }
         
     }
