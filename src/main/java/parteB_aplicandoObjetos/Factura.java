@@ -2,6 +2,7 @@
 package parteB_aplicandoObjetos;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -14,15 +15,28 @@ public class Factura {
     private Date fecha;
     private Cliente cliente;
     private ArrayList<DetalleFactura> detallesFacturas = new ArrayList<>();
-    private String [][] itemsFactura;
+    private ArrayList<String[]> itemsfactura = new ArrayList<>();
 
-    public String[][] getItemsFactura() {
-        return itemsFactura;
+    public ArrayList<String[]> getItemsfactura() {
+        return itemsfactura;
     }
 
-    public void setItemsFactura(String[][] itemsFactura) {
-        this.itemsFactura = itemsFactura;
+    public void setItemsfactura(ArrayList<String[]> itemsfactura) {
+        this.itemsfactura = itemsfactura;
     }
+
+ 
+    public void additemsFactura(String []item) {
+         this.itemsfactura.add(item);
+    }
+
+//    public String[][] getItemsFactura() {
+//        return itemsFactura;
+//    }
+//
+//    public void setItemsFactura(String[][] itemsFactura) {
+//        this.itemsFactura = itemsFactura;
+//    }
 
     public Factura() {
     }
@@ -116,10 +130,10 @@ public class Factura {
     }
     
     public DetalleFactura agregarArticulo(String[] articulo, int posicion, Scanner sc) {
-        itemsFactura[posicion][0] = articulo[0];
-        itemsFactura[posicion][1] = articulo[1];
-        itemsFactura[posicion][2] = articulo[2];
-        
+        String [] items = new String[5];
+        items[0]=articulo[0];
+        items[1]=articulo[1];
+        items[2]=articulo[2];
         String cantidadAFact=null;
         
         System.out.println("Ingrese la cantidad a facturar: ");
@@ -143,7 +157,7 @@ public class Factura {
             
         }
         
-        itemsFactura[posicion][3] = cantidadAFact;
+        items[3]= cantidadAFact;
         
         DetalleFactura detalle = new DetalleFactura();
         detalle.setCantidad(Double.parseDouble(cantidadAFact));
@@ -152,8 +166,8 @@ public class Factura {
         double subTotal = precioUnitario * Double.parseDouble(cantidadAFact);
         
         detalle.setSubtotal(subTotal);
-        itemsFactura[posicion][4] = String.valueOf(subTotal);
-
+        items[4] = String.valueOf(subTotal);
+        additemsFactura(items);
         return detalle;      
     }
     
@@ -175,13 +189,16 @@ public class Factura {
         }
     }
     
-    public void calcularMontoFinal(int filas, String tipoPago) {
-        // Suma de subtotales
+    public void calcularMontoFinal(String tipoPago) {
+         //Suma de subtotales
+         
         double totalItems = 0;
 
-        for (int f = 0; f < filas; f++) {
-            totalItems += Double.parseDouble(itemsFactura[f][4]);
+        for (String[] string: itemsfactura){
+            totalItems += Double.valueOf(string[4]);
+            
         }
+      
 
         //Recargo y Monto final
         double recargo = 0;
@@ -196,11 +213,11 @@ public class Factura {
             recargo = 10 * totalItems / 100;
             montoFinal = totalItems + recargo;
         }
-
-        mostrarMatriz(filas, totalItems, recargo, montoFinal);
+//
+        mostrarMatriz( totalItems, recargo, montoFinal);
     }
     
-    public void mostrarMatriz(int filas, double totalItems, double recargo, double montoFinal) {
+    public void mostrarMatriz( double totalItems, double recargo, double montoFinal) {
          System.out.println(espacios("Fecha:")+espacios(String.valueOf(getFecha())));
         System.out.println(espacios("Nro° Factura:")+espacios(String.valueOf(getNumero())));
        // System.out.println(espacios("Razon Social")+espacios(getCliente().getRazonSocial));
@@ -209,11 +226,8 @@ public class Factura {
         System.out.println(espacios("Letra: ")+espacios(getLetra()));
         System.out.println("----------------------------------------------------------------------------------------------------");
         System.out.println(espacios("CÓDIGO")+espacios("DENOMINACIÓN ")+espacios("PRECIO UNITARIO ")+espacios("CANTIDAD") +espacios("SUBTOTAL")  );
-        for (int f = 0; f < filas; f++) {
-            for (int c = 0; c < 5; c++) {
-                System.out.print(espacios(itemsFactura[f][c]) );
-            }
-            System.out.println("");
+        for (String[] strings : itemsfactura) {
+            System.out.println(espacios(strings[0])+espacios(strings[1])+espacios(strings[2])+espacios(strings[3])+espacios(strings[4]));
         }
         System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.println(espacios("TOTAL ÍTEMS = ")+espacios(String.valueOf(totalItems)) );

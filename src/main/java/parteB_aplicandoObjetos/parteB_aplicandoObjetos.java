@@ -21,9 +21,9 @@ public class parteB_aplicandoObjetos {
                 // Pedir datos del cliente
                 cliente = pedirDatosCliente(sc);
                 // Artículos
-                int cantArticulos = pedirDatosArticulos(sc, facturaCreada);
+                pedirDatosArticulos(sc, facturaCreada);
                 //Calcular monto final
-                facturaCreada.calcularMontoFinal(cantArticulos, facturaCreada.getTipoPago());
+                facturaCreada.calcularMontoFinal( facturaCreada.getTipoPago());
                 
                 facturaCreada.setCliente(cliente);
                 cliente.addFacturas(facturaCreada);
@@ -36,8 +36,8 @@ public class parteB_aplicandoObjetos {
 
                 if (repetirCliente == 1) {
                     Factura nuevaFactura = pedirDatosFactura(sc);
-                    int cantArticulos = pedirDatosArticulos(sc, nuevaFactura);
-                    nuevaFactura.calcularMontoFinal(cantArticulos, nuevaFactura.getTipoPago());
+                   pedirDatosArticulos(sc, nuevaFactura);
+                    nuevaFactura.calcularMontoFinal( nuevaFactura.getTipoPago());
                     nuevaFactura.setCliente(cliente);
                     cliente.addFacturas(nuevaFactura);  
                     System.out.println("Nueva factura agregada al cliente");
@@ -45,8 +45,8 @@ public class parteB_aplicandoObjetos {
                 } else {
                     Factura nuevaFactura = pedirDatosFactura(sc);
                     Cliente nuevoCliente = pedirDatosCliente(sc);
-                    int cantArticulos = pedirDatosArticulos(sc, nuevaFactura);
-                    nuevaFactura.calcularMontoFinal(cantArticulos, nuevaFactura.getTipoPago());
+                  pedirDatosArticulos(sc, nuevaFactura);
+                    nuevaFactura.calcularMontoFinal(nuevaFactura.getTipoPago());
                     nuevaFactura.setCliente(nuevoCliente);
                     nuevoCliente.addFacturas(nuevaFactura);
                     System.out.println("Nueva factura con nuevo cliente");
@@ -119,27 +119,22 @@ public class parteB_aplicandoObjetos {
     }
     
     // Datos artículos
-    public static int pedirDatosArticulos(Scanner sc, Factura factura) {
-        System.out.println("Ingrese la cantidad de artículos: ");
-        int cantArticulos = sc.nextInt();
-        while (cantArticulos <= 0) {
-            System.out.println("Incorrecto, la cantidad de artículos debe ser mayor a cero, ingrese de nuevo: ");
-            cantArticulos = sc.nextInt();
-        }
-        sc.nextLine();
-        
+    public static void pedirDatosArticulos(Scanner sc, Factura factura) {
+      
         //Setear dimension matriz factura
-        factura.setItemsFactura(new String[cantArticulos][5]);
+       // factura.setItemsFactura(new String[cantArticulos][5]);
         
         //Mostrar artículos
         System.out.println("--------");
         Articulo articulo = new Articulo();
-        articulo.mostrarArticulos();
+        
 
         System.out.println("");
         int ingresos = 0;
+        int opcion = 1;
 
-        while (ingresos < cantArticulos) {
+        while (opcion == 1) {
+            articulo.mostrarArticulos();
             System.out.println("Ingrese el código del artículo: ");
             String codigoIngresado = sc.nextLine();
 
@@ -158,10 +153,13 @@ public class parteB_aplicandoObjetos {
             detalle.setArticulo(articulo);
             factura.addDetalle(detalle);
             articulo.addDetalle(detalle);
-            ingresos++;
+            System.out.println("se agrego el articulo "+ articulo.getDenominacion() + " correctamente");
+            System.out.println("¿Desea agregar otro artículo? 1-SI 2-NO");
+            opcion = sc.nextInt();
+            sc.nextLine();
         }
         
-        return cantArticulos;
+       
     }
     
 }
